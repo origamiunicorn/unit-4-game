@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Game</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div id="atTheBeginning">
+            <div class="characterCard" id="Chara1" hp="20" ap="5" cap="5">
+                <span class="characterName">Murray</span><br />
+                <img src="https://www.fillmurray.com/150/150" alt="Fill Murray." /><br />
+                <span class="healthPoints">20</span>
+            </div>
+            <div class="characterCard" id="Chara2" hp="25" ap="7" cap="7">
+                <span class="characterName">Bill</span><br />
+                <img src="https://www.fillmurray.com/150/150" alt="Fill Murray." /><br />
+                <span class="healthPoints">25</span>
+            </div>
+            <div class="characterCard" id="Chara3" hp="30" ap="9" cap="9">
+                <span class="characterName">Bill Murray</span><br />
+                <img src="https://www.fillmurray.com/150/150" alt="Fill Murray." /><br />
+                <span class="healthPoints">30</span>
+            </div>
+        </div>
+        <h1>Your Character</h1>
+        <div id="theChosenOne">
+        </div>
+        <h1>Enemies Available to Attack</h1>
+        <div id="beMyEnemy">
+        </div>
+        <h1>Fight Club</h1>
+        <div id="thisIsSparta">
+            <button id="overNineThousand">Fight</button>
+        </div>
+        <h1>Defender</h1>
+        <div id="aFleshWound">
+        </div>
+        <div id="theWord">
+        </div>
+        <button id="playItAgain">Restart</button>
+    </div>
+
+    <script src="./assets/javascript/game.js"></script>
+
+</body>
+
+</html>
