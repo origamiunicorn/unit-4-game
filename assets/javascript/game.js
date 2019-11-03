@@ -46,7 +46,8 @@ $(document).ready(function () {
     $("#overNineThousand").click(function (e) {
         e.preventDefault();
 
-        // Turn all my values for HP, attack power, and counterattack power into numbers after pulling from the two different relevant character cards
+        // Turn all my values for HP, attack power, and counterattack power into numbers after pulling from the two different relevant character cards. Thought: make empty variables, then define them initially as values from document.
+
         var charHP = parseInt($("#theChosenOne").children("div").attr("hp"));
         var enemyHP = parseInt($("#aFleshWound").children("div").attr("hp"));
         var charAttack = parseInt($("#theChosenOne").children("div").attr("ap"));
