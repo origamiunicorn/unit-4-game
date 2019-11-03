@@ -3,10 +3,8 @@ $(document).ready(function () {
     console.log("I am console log.");
 
     var charaSelect = 0;
-    // var enemySelect = 0;
-    // var wins = 0;
     var attackNum = 0;
-    var attackPower;
+
     $("#playItAgain").hide();
 
     // On click of character card...
@@ -39,57 +37,55 @@ $(document).ready(function () {
                     return;
                 }
 
-                $(this).css("background-color", "green").detach().appendTo("#aFleshWound");
+                $(this).addClass("activeEnemy").css("background-color", "green").detach().appendTo("#aFleshWound");
 
             });
-
-
-            // Ideally, turn off click event again. Havng trouble here as it's instead stopping this enemy click event as a whole from happening when I have "off" in use.
-            // Use the :empty selector to check for element being empty, if empty, DO THIS
-            // enemySelect++;
-            // if (enemySelect >= 1) {
-            //     $(".enemyFighters").off("click");
-            // }
         });
     }
 
     $("#overNineThousand").click(function (e) {
-        e.preventDefault(); // Not sure if this is needed, but jic
+        e.preventDefault();
 
         // Turn all my values for HP, attack power, and counterattack power into numbers after pulling from the two different relevant character cards
         var charHP = parseInt($("#theChosenOne").children("div").attr("hp"));
-        console.log(jQuery.type(charHP) + " " + charHP);
         var enemyHP = parseInt($("#aFleshWound").children("div").attr("hp"));
         var charAttack = parseInt($("#theChosenOne").children("div").attr("ap"));
         var charAttackIncrease = parseInt($("#theChosenOne").children("div").attr("ap"));
         var enemyCounter = parseInt($("#aFleshWound").children("div").attr("cap"));
 
+        var newCharHP = parseInt($("#theChosenOne").find(".healthPoints").text());
+        var newEnemyHP = parseInt($("#aFleshWound").find(".healthPoints").text());
+        console.log(newCharHP, newEnemyHP);
+
         // An attempt to allow attackPower of the chosen character to be only their initial attack power, and then to increase it by that attack power after the first "fight".
-        attackPower = charAttack;
-        attackNum++
-        if (attackNum > 1) {
-            attackPower = attackPower + charAttackIncrease;
-            return attackPower;
+        var attackPower = 0;
+        if (attackNum >= 1) {
+            attackPower = charAttack += charAttackIncrease * attackNum;
+            console.log("Combined Attack Power: " + attackPower);
         }
+        attackNum++
 
         // If neither character nor enemy have zero (or less) HP left, take their current HP, subtrack the enemy attack value, and then update text to page. But am not updating right now their scores, look at this and what needs to happen. Happens once! 
 
-        if (charHP > 0 && enemyHP > 0) {
-            var reduceEnemy = enemyHP - attackPower;
-            var reduceChara = charHP - enemyCounter;
+        if (newCharHP > 0 && newEnemyHP > 0) {
+
+            newEnemyHP = newEnemyHP -= attackPower;
+            newCharHP = newCharHP -= enemyCounter;
 
             // Update the visible HP on the character cards
-            $("#theChosenOne").find(".healthPoints").text(reduceChara);
-            $("#aFleshWound").find(".healthPoints").text(reduceEnemy);
+            $("#theChosenOne").find(".healthPoints").text(newCharHP);
+            $("#aFleshWound").find(".healthPoints").text(newEnemyHP);
 
             // State on page what happened.
-            $("#theWord").html("<span class='playerDamage'>You attacked " + $("#theChosenOne").find(".characterName").text() + " for " + attackPower + " damage. </span> <br />");
+            $("#theWord").html("<span class='playerDamage'>You attacked " + $("#theChosenOne").find(".characterName").text() + " for " + charAttack + " damage. </span> <br />");
             $("#theWord").append("<span class='enemyDamage'> " + $("#aFleshWound").find(".characterName").text() + " attacked you back for " + enemyCounter + " damage. </span> <br />");
 
-        } else if (enemyHP === 0) {
+        } else if (newEnemyHP <= 0) {
             alert("Enemy lost!")
 
-            // State in #theWord that you won, and detach the enemy characterCard. Reactivate the enemy onClick capability... this currently isn't "deactivated". State "select another enemy".
+            // State in #theWord that you won, and detach the enemy characterCard. State "select another enemy".
+            // Okay, instead, make a hidden div to place all defeated enemies after defeat.
+            $(".activeEnemy").detach().appendTo("#graveyard").hide();
             $("#theWord").html("<span>You have defeated " + $("#aFleshWound").find(".characterName").text() + ". Select another enemy to fight.</span>")
 
         } else {
