@@ -55,12 +55,11 @@ $(document).ready(function () {
 
         var newCharHP = parseInt($("#theChosenOne").find(".healthPoints").text());
         var newEnemyHP = parseInt($("#aFleshWound").find(".healthPoints").text());
-        console.log(newCharHP, newEnemyHP);
 
         // An attempt to allow attackPower of the chosen character to be only their initial attack power, and then to increase it by that attack power after the first "fight".
-        var attackPower = 0;
+        var attackPower = charAttack;
         if (attackNum >= 1) {
-            attackPower = charAttack += charAttackIncrease * attackNum;
+            attackPower = charAttack += (charAttackIncrease * attackNum);
             console.log("Combined Attack Power: " + attackPower);
         }
         attackNum++
@@ -69,24 +68,28 @@ $(document).ready(function () {
 
         if (newCharHP > 0 && newEnemyHP > 0) {
 
-            newEnemyHP = newEnemyHP -= attackPower;
-            newCharHP = newCharHP -= enemyCounter;
+            charHP = charHP -= enemyCounter;
+            enemyHP = enemyHP -= attackPower;
 
             // Update the visible HP on the character cards
-            $("#theChosenOne").find(".healthPoints").text(newCharHP);
-            $("#aFleshWound").find(".healthPoints").text(newEnemyHP);
+            $("#theChosenOne").find(".healthPoints").text(charHP);
+            $("#aFleshWound").find(".healthPoints").text(enemyHP);
 
             // State on page what happened.
-            $("#theWord").html("<span class='playerDamage'>You attacked " + $("#theChosenOne").find(".characterName").text() + " for " + charAttack + " damage. </span> <br />");
+            $("#theWord").html("<span class='playerDamage'>You attacked " + $("#aFleshWound").find(".characterName").text() + " for " + charAttack + " damage. </span> <br />");
             $("#theWord").append("<span class='enemyDamage'> " + $("#aFleshWound").find(".characterName").text() + " attacked you back for " + enemyCounter + " damage. </span> <br />");
 
         } else if (newEnemyHP <= 0) {
-            alert("Enemy lost!")
 
             // State in #theWord that you won, and detach the enemy characterCard. State "select another enemy".
             // Okay, instead, make a hidden div to place all defeated enemies after defeat.
+
+            var enemyName;
+            enemyName = $("#aFleshWound").find(".characterName").text();
+
+            $("#theWord").html("<span>You have defeated " + enemyName + ", you can select another enemy to fight.</span>")
             $(".activeEnemy").detach().appendTo("#graveyard").hide();
-            $("#theWord").html("<span>You have defeated " + $("#aFleshWound").find(".characterName").text() + ". Select another enemy to fight.</span>")
+
 
         } else {
             $("#theWord").html("<span>You have been defeated... GAME OVER!</span>")
