@@ -110,7 +110,7 @@ $(document).ready(function () {
             $(".activeEnemy").detach().appendTo("#graveyard").hide();
 
 
-        } else if (charHP <= 0 && enemyHP > 0) {
+        } else if (charHP <= 0 && enemyHP >= 0 || charHP <= 0 && enemyHP <= 0) {
 
             $("#theWord").html("<span>You have been defeated... GAME OVER!</span>");
             // And display a "Restart" button that on click reloads the page.
