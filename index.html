@@ -5,49 +5,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Game</title>
+    <title>Monster Fight Game</title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Joti+One|Finger+Paint&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+
 </head>
 
 <body>
 
     <div class="container">
+        <h1 id="topTitle">Monster vs Monster: Who Will Win?</h1>
         <div id="atTheBeginning">
-            <div class="characterCard" id="Chara1" hp="20" ap="5" cap="5">
-                <span class="characterName">Murray</span><br />
-                <img src="https://www.fillmurray.com/150/150" alt="Fill Murray." /><br />
-                <span class="healthPoints">20</span>
+            <div class="characterCard" hp="204" ap="23" cap="31">
+                <span class="characterName">Tribble</span><br />
+                <img class="characterImage" src="./assets/images/tribble.jpg"
+                    alt="A man wearing a yellow form-fitting shirt holds a cream-brown ball of fur about the size of his hand up and stares at it critically. The man is Captain Kirk. He is holding a Tribble from the Star Trek television series franchise." /><br />
+                <span class="healthPoints">204</span>
             </div>
-            <div class="characterCard" id="Chara2" hp="25" ap="7" cap="7">
-                <span class="characterName">Bill</span><br />
-                <img src="https://www.fillmurray.com/150/150" alt="Fill Murray." /><br />
-                <span class="healthPoints">25</span>
+            <div class="characterCard" hp="255" ap="11" cap="19">
+                <span class="characterName">Otachi</span><br />
+                <img class="characterImage" src="./assets/images/otachi.jpg"
+                    alt="A large creature stands on four legs with anvil-like protrustions on its head, and a crocodilian tail curling up behind it. The creature is surrounded by green haze and fog. It is Otachi, a Kaiju from the Pacific Rim movie." /><br />
+                <span class="healthPoints">255</span>
             </div>
-            <div class="characterCard" id="Chara3" hp="30" ap="9" cap="9">
-                <span class="characterName">Bill Murray</span><br />
-                <img src="https://www.fillmurray.com/150/150" alt="Fill Murray." /><br />
-                <span class="healthPoints">30</span>
+            <div class="characterCard" hp="215" ap="19" cap="11">
+                <span class="characterName">Graboid</span><br />
+                <img class="characterImage" src="./assets/images/graboid.jpg"
+                    alt="A large, tube shaped creature lies on the desert ground with mountains in the background and sky visible overhead. Its mouth is three pronged and open, with snake-like appendages coming out. It is a Graboid from the Tremors franchise movies." /><br />
+                <span class="healthPoints">215</span>
+            </div>
+            <div class="characterCard" hp="230" ap="13" cap="15">
+                <span class="characterName">Xenoqueen</span><br />
+                <img class="characterImage" src="./assets/images/xenomorphqueen.jpg"
+                    alt="A dark bipedal alien with multiple sets of limbs, a knobby, spiny tail and an elongated head has its mouth open, teeth exposed, salivia dripping from its mouth as it screams. It is a Xenomorph Queen from the Aliens franchise movies." /><br />
+                <span class="healthPoints">230</span>
+            </div>
+            <div class="characterCard" hp="227" ap="17" cap="13">
+                <span class="characterName">Arachnid</span><br />
+                <img class="characterImage" src="./assets/images/arachnid.jpg"
+                    alt="A soldier lies on their back on the ground, while an angular, bug-like creature looms over them, scythe-like limbs poised to strike. It is an Arachnid from the Starship Troopers franchise movies." /><br />
+                <span class="healthPoints">227</span>
+            </div>
+            <div class="characterCard" hp="297" ap="8" cap="21">
+                <span class="characterName">Godzilla</span><br />
+                <img class="characterImage" src="./assets/images/godzilla.jpg"
+                    alt="A large, reptilian biped looms in the distance, behind a tree filled hill. Fog obscures parts of its torso. The creature looks off to the left, and is backdropped by a mildly cloudy sky. It is Godzilla from the Godzilla: Planet of the Monsters movie of the Godzilla franchise movies." /><br />
+                <span class="healthPoints">297</span>
             </div>
         </div>
-        <h1>Your Character</h1>
+        <h1 id="yourMonster">Your Monster</h1>
         <div id="theChosenOne">
         </div>
-        <h1>Enemies Available to Attack</h1>
-        <div id="beMyEnemy">
+        <h1 id="monstersAvail">Monsters Available to Fight</h1>
+        <div id="beMyEnemy" class="beMyEnemy">
         </div>
-        <h1>Fight Club</h1>
+        <h1 id="faito">Faito! Faito!</h1>
         <div id="thisIsSparta">
             <button id="overNineThousand">Fight</button>
         </div>
-        <h1>Defender</h1>
+        <h1 id="defendMons">Defending Monster</h1>
         <div id="aFleshWound">
         </div>
         <div id="theWord">
         </div>
+        <div id="graveyard">
+        </div>
         <button id="playItAgain">Restart</button>
+        <div id="filler"></div>
     </div>
 
     <script src="./assets/javascript/game.js"></script>

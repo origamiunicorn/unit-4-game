@@ -1,29 +1,173 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-size: 16px;
+    font-family: 'Finger Paint', cursive, serif;
+    background-color: #000;
+    background-image: url("../images/background-creek.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
 }
 
 h1 {
     font-size: 2em;
-    margin: 10px 5px;
+    margin: 0 10px;
     padding: 10px 0;
+    text-align: center;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.747);
 }
 
 button {
-    font-size: 1em;
+    font-family: 'Joti One', cursive, serif;
+    font-size: 2em;
+    background-color: rgba(57, 18, 230, 0.7);
+    color: #fff;
+    border: none;
+    text-align: center;
+    padding: 32px 32px;
     margin: 5px;
+    border-radius: 50%;
 }
 
-#atTheBeginning, #theChosenOne, #beMyEnemy {
+.container {
+    display: grid;
+    grid-gap: 10px;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+#topTitle {
+    grid-column: 1 / 4;
+    grid-row: 1;
+}
+
+#atTheBeginning {
+    grid-column: 1 / 4;
+    grid-row: 2;
+}
+
+#yourMonster {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+#faito {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+#defendMons {
+    grid-column: 3;
+    grid-row: 3;
+}
+
+#theChosenOne {
+    grid-column: 1;
+    grid-row: 4;
+}
+
+#thisIsSparta {
+    grid-column: 2;
+    grid-row: 4;
+}
+
+#aFleshWound {
+    grid-column: 3;
+    grid-row: 4;
+}
+
+#theWord {
+    grid-column: 1 / 4;
+    grid-row: 5;
+}
+
+#playItAgain {
+    grid-column: 2 / 3;
+    grid-row: 6;
+}
+
+#monstersAvail {
+    grid-column: 1 / 4;
+    grid-row: 7;
+}
+
+#beMyEnemy {
+    grid-column: 1 / 4;
+    grid-row: 8;
+}
+
+#graveyard {
+    grid-column: 1 / 4;
+    grid-row: 9
+}
+
+#overNineThousand, #playItAgain {
+    text-align: center;
+}
+
+#atTheBeginning, #theChosenOne, #beMyEnemy, #aFleshWound, #thisIsSparta {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     width: 100%;
     padding: 10px;
+    justify-content: center;
+    align-content: center;
 }
 
 .characterCard {
-    width: 200px;
+    width: 250px;
+    background: rgba(255, 255, 255, 0.3);;
     border: 2px solid #ccc;
     padding: 10px;
     margin: 10px;
     text-align: center;
+}
+
+.characterImage {
+    padding: 5px 0;
+    border-radius: 50%;
+}
+
+.characterName {
+    font-size: 2em;
+}
+
+.healthPoints {
+    font-weight: 700;
+    font-size: 1.5em;
+}
+
+#theWord {
+    font-family: 'Joti One', cursive, serif;
+    text-align: center;
+    font-size: 1.2em;
+    color: #000;
+    text-shadow: 2px 2px rgba(158, 9, 91, 0.3);
+    background-color: rgba(255, 255, 255, 0.7);
+    height: 58px;
+    padding: 10px;
+}
+
+#graveyard {
+    height: 10px;
+    width: 100%;
+}
+
+#filler {
+    height: 30px;
 }
