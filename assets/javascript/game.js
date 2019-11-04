@@ -26,7 +26,7 @@ $(document).ready(function () {
 
             // Find all divs left in #atTheBeginning, add enemyFighters class, set background to red, and move to #beMyEnemy div.
             var remainingCharacters = $("#atTheBeginning").find("div");
-            remainingCharacters.addClass("enemyFighters").css("background-color", "red").detach().appendTo("#beMyEnemy");
+            remainingCharacters.addClass("enemyFighters").css("background-color", "rgba(255, 0, 0, 0.3)").detach().appendTo("#beMyEnemy");
 
             charaSelect++; // Increase character selection by one increment
             // If a user has selected a character, then turn off the click event (do not select more).
@@ -44,7 +44,7 @@ $(document).ready(function () {
                     return;
                 }
 
-                $(this).removeClass("enemyFighters").addClass("activeEnemy").css("background-color", "green").detach().appendTo("#aFleshWound");
+                $(this).removeClass("enemyFighters").addClass("activeEnemy").css("background-color", "rgba(0, 255, 0, 0.3)").detach().appendTo("#aFleshWound");
                 enemyHP = parseInt($("#aFleshWound").children("div").attr("hp"));
                 enemyCounter = parseInt($("#aFleshWound").children("div").attr("cap"));
                 enemyName = $("#aFleshWound").find(".characterName").text();
@@ -95,7 +95,7 @@ $(document).ready(function () {
         if (charHP > 0 && enemyHP <= 0 && leftStanding.length <= 0) {
 
             // You won!
-            $("#theWord").html("<span>You have defeated all comers! Congratulations! You've won!</span>");
+            $("#theWord").html("<span class='winner'>You have defeated all comers! Congratulations! You've won!</span>");
             $(".activeEnemy").detach().appendTo("#graveyard").hide();
             // And display a "Restart" button that on click reloads the page.
             $("#playItAgain").show().click(function () {
@@ -112,7 +112,7 @@ $(document).ready(function () {
 
         } else if (charHP <= 0 && enemyHP >= 0 || charHP <= 0 && enemyHP <= 0) {
 
-            $("#theWord").html("<span>You have been defeated... GAME OVER!</span>");
+            $("#theWord").html("<span class='defeated'>Game over, man... Game over!</span>");
             // And display a "Restart" button that on click reloads the page.
             $("#playItAgain").show().click(function () {
                 location.reload(true);
