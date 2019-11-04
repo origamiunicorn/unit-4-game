@@ -92,16 +92,17 @@ $(document).ready(function () {
         var leftStanding = $("#beMyEnemy").children("div");
         console.log(leftStanding);
 
-        if (charHP > 0 && enemyHP < 0 && leftStanding.length <= 0) {
+        if (charHP > 0 && enemyHP <= 0 && leftStanding.length <= 0) {
 
             // You won!
             $("#theWord").html("<span>You have defeated all comers! Congratulations! You've won!</span>");
+            $(".activeEnemy").detach().appendTo("#graveyard").hide();
             // And display a "Restart" button that on click reloads the page.
             $("#playItAgain").show().click(function () {
                 location.reload(true);
             });
 
-        } else if (charHP > 0 && enemyHP < 0 && leftStanding.length > 0) {
+        } else if (charHP > 0 && enemyHP <= 0 && leftStanding.length > 0) {
 
             // State in #theWord that you won, and detach the enemy characterCard. State "select another enemy".
 
@@ -109,9 +110,9 @@ $(document).ready(function () {
             $(".activeEnemy").detach().appendTo("#graveyard").hide();
 
 
-        } else if (charHP <= 0 && enemyHP > 0 || charHP <= 0 && enemyHP >= 0) {
-            $("#theWord").html("<span>You have been defeated... GAME OVER!</span>");
+        } else if (charHP <= 0 && enemyHP > 0) {
 
+            $("#theWord").html("<span>You have been defeated... GAME OVER!</span>");
             // And display a "Restart" button that on click reloads the page.
             $("#playItAgain").show().click(function () {
                 location.reload(true);
