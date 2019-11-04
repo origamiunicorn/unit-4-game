@@ -1,7 +1,4 @@
 $(document).ready(function () {
-
-    console.log("I am console log.");
-
     var charaSelect = 0;
     var attackNum = 0;
     var charHP;
@@ -17,8 +14,6 @@ $(document).ready(function () {
     // On click of character card...
     function chooseYourFighter() {
         $(".characterCard").click(function () {
-            console.log(this); // To see which DIV was selected
-
             // ... move clicked card to #theChosenOne div.
             $(this).detach().appendTo("#theChosenOne");
             charHP = parseInt($("#theChosenOne").children("div").attr("hp"));
@@ -36,9 +31,8 @@ $(document).ready(function () {
 
             // For the enemy fighters, make new click event. On click, change background to green, move enemy card to #aFleshWound div.
             $(".enemyFighters").click(function () {
+                // Look for enemy in #aFleshWound first, prevent enemy population if one is present.
                 var myChild = $("#aFleshWound").children("div");
-                console.log(myChild);
-
                 if (myChild.attr("hp")) {
                     alert("Please face off with your first defender first!");
                     return;
@@ -48,7 +42,6 @@ $(document).ready(function () {
                 enemyHP = parseInt($("#aFleshWound").children("div").attr("hp"));
                 enemyCounter = parseInt($("#aFleshWound").children("div").attr("cap"));
                 enemyName = $("#aFleshWound").find(".characterName").text();
-
             });
         });
     }
@@ -58,14 +51,11 @@ $(document).ready(function () {
 
         // make a variable that checks if #aFleshWound has an enemy in it. If not, then return and do nothing.
         var isEnemyThere = $("#aFleshWound").children("div");
-        console.log(isEnemyThere);
 
         if (isEnemyThere.length > 0) {
             // Allow each value (enemy or char HP) to be subtracted from on click; with attackNum increasing each click, the charAttack will increase with each subsequent fight.
             enemyHP -= (charAttack + (charAttack * attackNum));
-            console.log(enemyHP);
             charHP -= enemyCounter;
-            console.log(charHP);
 
             // Update the visible HP on the character cards
             $("#theChosenOne").find(".healthPoints").text(charHP);
@@ -76,24 +66,18 @@ $(document).ready(function () {
             $("#theWord").append("<span class='enemyDamage'> " + enemyName + " attacked you back for " + enemyCounter + " damage. </span> <br />");
 
             lookingForWin();
-
         } else {
             alert("There's no one to attack!");
-            console.log(isEnemyThere);
             return;
         }
-
         attackNum++;
-
     });
 
     function lookingForWin() {
         // If neither character nor enemy have zero (or less) HP left, take their current HP, subtract the enemy attack value, and then update text to page. But am not updating right now their scores, look at this and what needs to happen. Happens once! 
         var leftStanding = $("#beMyEnemy").children("div");
-        console.log(leftStanding);
 
         if (charHP > 0 && enemyHP <= 0 && leftStanding.length <= 0) {
-
             // You won!
             $("#theWord").html("<span class='winner'>You have defeated all comers! Congratulations! You've won!</span>");
             $(".activeEnemy").detach().appendTo("#graveyard").hide();
@@ -101,27 +85,18 @@ $(document).ready(function () {
             $("#playItAgain").show().click(function () {
                 location.reload(true);
             });
-
         } else if (charHP > 0 && enemyHP <= 0 && leftStanding.length > 0) {
-
             // State in #theWord that you won, and detach the enemy characterCard. State "select another enemy".
-
             $("#theWord").html("<span>You have defeated " + enemyName + "! Select another enemy to fight.</span>");
             $(".activeEnemy").detach().appendTo("#graveyard").hide();
-
-
         } else if (charHP <= 0 && enemyHP >= 0 || charHP <= 0 && enemyHP <= 0) {
-
             $("#theWord").html("<span class='defeated'>Game over, man... Game over!</span>");
             // And display a "Restart" button that on click reloads the page.
             $("#playItAgain").show().click(function () {
                 location.reload(true);
             });
         }
-
     };
-
     chooseYourFighter();
-
 }
 );
