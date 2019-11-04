@@ -4,7 +4,13 @@ $(document).ready(function () {
 
     var charaSelect = 0;
     var attackNum = 0;
+    var charHP;
+    var enemyHP;
+    var charAttack;
+    var enemyCounter;
+    var attackNum = 0;
 
+    // Hide the reset button
     $("#playItAgain").hide();
 
     // On click of character card...
@@ -14,7 +20,8 @@ $(document).ready(function () {
 
             // ... move clicked card to #theChosenOne div.
             $(this).detach().appendTo("#theChosenOne");
-
+            charHP = parseInt($("#theChosenOne").children("div").attr("hp"));
+            charAttack = parseInt($("#theChosenOne").children("div").attr("ap"));
 
             // Find all divs left in #atTheBeginning...
             var remainingCharacters = $("#atTheBeginning").find("div");
@@ -38,6 +45,8 @@ $(document).ready(function () {
                 }
 
                 $(this).addClass("activeEnemy").css("background-color", "green").detach().appendTo("#aFleshWound");
+                enemyHP = parseInt($("#aFleshWound").children("div").attr("hp"));
+                enemyCounter = parseInt($("#aFleshWound").children("div").attr("cap"));
 
             });
         });
@@ -46,41 +55,32 @@ $(document).ready(function () {
     $("#overNineThousand").click(function (e) {
         e.preventDefault();
 
-        // Turn all my values for HP, attack power, and counterattack power into numbers after pulling from the two different relevant character cards. Thought: make empty variables, then define them initially as values from document.
+        // Allow each value (enemy or char HP) to be subtracted from on click; with attackNum increasing each click, the charAttack will increase with each subsequent fight.
+        enemyHP -= (charAttack + (charAttack * attackNum));
+        console.log(enemyHP);
+        charHP -= enemyCounter;
+        console.log(charHP);
 
-        var charHP = parseInt($("#theChosenOne").children("div").attr("hp"));
-        var enemyHP = parseInt($("#aFleshWound").children("div").attr("hp"));
-        var charAttack = parseInt($("#theChosenOne").children("div").attr("ap"));
-        var charAttackIncrease = parseInt($("#theChosenOne").children("div").attr("ap"));
-        var enemyCounter = parseInt($("#aFleshWound").children("div").attr("cap"));
+        attackNum++;
 
-        var newCharHP = parseInt($("#theChosenOne").find(".healthPoints").text());
-        var newEnemyHP = parseInt($("#aFleshWound").find(".healthPoints").text());
+        lookingForWin();
 
-        // An attempt to allow attackPower of the chosen character to be only their initial attack power, and then to increase it by that attack power after the first "fight".
-        var attackPower = charAttack;
-        if (attackNum >= 1) {
-            attackPower = charAttack += (charAttackIncrease * attackNum);
-            console.log("Combined Attack Power: " + attackPower);
-        }
-        attackNum++
+    });
 
-        // If neither character nor enemy have zero (or less) HP left, take their current HP, subtrack the enemy attack value, and then update text to page. But am not updating right now their scores, look at this and what needs to happen. Happens once! 
+    function lookingForWin() {
+        // If neither character nor enemy have zero (or less) HP left, take their current HP, subtract the enemy attack value, and then update text to page. But am not updating right now their scores, look at this and what needs to happen. Happens once! 
 
-        if (newCharHP > 0 && newEnemyHP > 0) {
-
-            charHP = charHP -= enemyCounter;
-            enemyHP = enemyHP -= attackPower;
+        if (charHP > 0 && enemyHP > 0) {
 
             // Update the visible HP on the character cards
             $("#theChosenOne").find(".healthPoints").text(charHP);
             $("#aFleshWound").find(".healthPoints").text(enemyHP);
 
             // State on page what happened.
-            $("#theWord").html("<span class='playerDamage'>You attacked " + $("#aFleshWound").find(".characterName").text() + " for " + charAttack + " damage. </span> <br />");
+            $("#theWord").html("<span class='playerDamage'>You attacked " + $("#aFleshWound").find(".characterName").text() + " for " + (charAttack + (charAttack * attackNum)) + " damage. </span> <br />");
             $("#theWord").append("<span class='enemyDamage'> " + $("#aFleshWound").find(".characterName").text() + " attacked you back for " + enemyCounter + " damage. </span> <br />");
 
-        } else if (newEnemyHP <= 0) {
+        } else if (enemyHP <= 0) {
 
             // State in #theWord that you won, and detach the enemy characterCard. State "select another enemy".
             // Okay, instead, make a hidden div to place all defeated enemies after defeat.
@@ -101,7 +101,7 @@ $(document).ready(function () {
             });
         }
 
-    })
+    };
 
     chooseYourFighter();
 
