@@ -40,3 +40,6 @@ The goal of the game is to strategically choose your opponents to incur the leas
 CSS Grid was used to lay the game out in a way to show the player's monster and defending monster on the same level. 
 
 jQuery was used to write the game script, making use of its built in functions or expansions on vanilla JavaScript to ease the process.
+
+Monster Images were taken from image searches, most being screencaps from their films/television series.
+Unsplash provided the background image, found here: (https://unsplash.com/photos/NRQV-hBF10M)
