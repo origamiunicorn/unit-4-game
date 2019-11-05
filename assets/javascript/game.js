@@ -34,7 +34,7 @@ $(document).ready(function () {
                 // Look for enemy in #aFleshWound first, prevent enemy population if one is present.
                 var myChild = $("#aFleshWound").children("div");
                 if (myChild.attr("hp")) {
-                    alert("Please face off with your first defender first!");
+                    $("#theWord").html("<span class='inFight'>Your current battle has not ended! <br /> Please finish your fight before selecting another opponent.</span>");
                     return;
                 }
 
@@ -63,11 +63,11 @@ $(document).ready(function () {
 
             // Announce the damage done to both parties.
             $("#theWord").html("<span class='playerDamage'>You attacked " + enemyName + " for " + (charAttack + (charAttack * attackNum)) + " damage. </span> <br />");
-            $("#theWord").append("<span class='enemyDamage'> " + enemyName + " attacked you back for " + enemyCounter + " damage. </span> <br />");
+            $("#theWord").append("<span class='enemyDamage'> " + enemyName + " attacked you in return for " + enemyCounter + " damage. </span> <br />");
 
             lookingForWin();
         } else {
-            alert("There's no one to attack!");
+            $("#theWord").html("<span class='noEnemy'>There's no monster to fight! <br /> Please select a monster to continue battle.</span>");
             return;
         }
         attackNum++;
@@ -79,7 +79,7 @@ $(document).ready(function () {
 
         if (charHP > 0 && enemyHP <= 0 && leftStanding.length <= 0) {
             // You won!
-            $("#theWord").html("<span class='winner'>You have defeated all comers! Congratulations! You've won!</span>");
+            $("#theWord").html("<span class='winner'>You have defeated all comers! <br /> Congratulations! You've won!</span>");
             $(".activeEnemy").detach().appendTo("#graveyard").hide();
             // And display a "Restart" button that on click reloads the page.
             $("#playItAgain").show().click(function () {
@@ -87,10 +87,10 @@ $(document).ready(function () {
             });
         } else if (charHP > 0 && enemyHP <= 0 && leftStanding.length > 0) {
             // State in #theWord that you won, and detach the enemy characterCard. State "select another enemy".
-            $("#theWord").html("<span>You have defeated " + enemyName + "! Select another enemy to fight.</span>");
+            $("#theWord").html("<span>You have defeated " + enemyName + "! <br /> Select another enemy to fight.</span>");
             $(".activeEnemy").detach().appendTo("#graveyard").hide();
         } else if (charHP <= 0 && enemyHP >= 0 || charHP <= 0 && enemyHP <= 0) {
-            $("#theWord").html("<span class='defeated'>Game over, man... Game over!</span>");
+            $("#theWord").html("<span class='defeated'>Game over, man... <br /> Game Over!</span>");
             // And display a "Restart" button that on click reloads the page.
             $("#playItAgain").show().click(function () {
                 location.reload(true);
