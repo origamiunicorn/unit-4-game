@@ -1,4 +1,6 @@
 # Monster Bash
+Find the live website here: https://origamiunicorn.github.io/unit-4-game/
+
 Monster Bash is a game made with JavaScript and the jQuery library for a class project. This is all part of a homework assignment for UCLA's Fullstack Web Development Coding Bootcamp (September 2019 to March 2020).
 
 The game begins by presenting the player with a series of monster cards from television and film, and have the player select one to be their fighter. Each of these monsters has three values, of which one is visible. Those values include their Health Points (HP), their Attack Power (AP), and their Counter-Attack Power (CAP). Health Points are visible below the image of the monster on each monster's card. 
